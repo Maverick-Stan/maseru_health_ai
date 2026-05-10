@@ -2,8 +2,13 @@
 
 from __future__ import annotations
 
+import os
+import sys
+import types
 import unittest
+from unittest.mock import patch
 
+from app.config import get_settings
 from app.parser import parse_user_input
 from app.rules import assess_safety
 from app.triage_service import TriageService
@@ -57,7 +62,18 @@ class SafetyWorkflowTests(unittest.TestCase):
         self.assertIsNotNone(result.error)
         self.assertIn("fallback", result.response.limitations.lower())
 
+    def test_streamlit_secret_sets_openai_environment_variable(self):
+        fake_streamlit = types.SimpleNamespace(
+            secrets={"OPENAI_API_KEY": "test-secret-key"}
+        )
+
+        with patch.dict(sys.modules, {"streamlit": fake_streamlit}):
+            with patch.dict(os.environ, {}, clear=True):
+                settings = get_settings()
+
+                self.assertEqual(settings.openai_api_key, "test-secret-key")
+                self.assertEqual(os.environ["OPENAI_API_KEY"], "test-secret-key")
+
 
 if __name__ == "__main__":
     unittest.main()
-

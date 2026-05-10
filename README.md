@@ -233,12 +233,19 @@ python -m unittest discover
 
 For Streamlit Cloud, use `application.py` as the main file.
 
-Configure secrets or environment variables in the deployment platform:
+Configure these as root-level Streamlit Cloud secrets:
 
 ```text
-OPENAI_API_KEY=your_api_key_here
-MASERU_LLM_MODEL=gpt-4o-mini
-MASERU_APP_NAME=maseru_health_support
+OPENAI_API_KEY = "your_api_key_here"
+MASERU_LLM_MODEL = "gpt-4o-mini"
+MASERU_APP_NAME = "maseru_health_support"
+```
+
+The app also supports this nested OpenAI secret format:
+
+```text
+[openai]
+api_key = "your_api_key_here"
 ```
 
 The app can still render safe fallback responses without `OPENAI_API_KEY`, but LLM-assisted guidance will not run.
