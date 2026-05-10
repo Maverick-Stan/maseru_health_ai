@@ -2,6 +2,8 @@
 
 Maseru Health AI is an operational AI assistant designed for healthcare support workflows in low-resource environments.
 
+Live app: [https://maseru-health-support-ai.streamlit.app/](https://maseru-health-support-ai.streamlit.app/)
+
 ## Overview
 
 Maseru Health AI is a Streamlit-based, non-diagnostic healthcare support assistant focused on safe conversational guidance, lightweight input parsing, rule-based safety escalation, and LLM-assisted response generation.
@@ -230,6 +232,10 @@ python -m unittest discover
 ```
 
 ## Deployment Notes
+
+The deployed Streamlit app is available here:
+
+[https://maseru-health-support-ai.streamlit.app/](https://maseru-health-support-ai.streamlit.app/)
 
 For Streamlit Cloud, use `application.py` as the main file.
 
